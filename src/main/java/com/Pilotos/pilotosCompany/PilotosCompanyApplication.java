@@ -1,5 +1,6 @@
 package com.Pilotos.pilotosCompany;
 
+import com.Pilotos.pilotosCompany.Model.Empresa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

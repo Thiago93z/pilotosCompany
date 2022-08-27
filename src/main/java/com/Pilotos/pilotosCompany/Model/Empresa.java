@@ -1,4 +1,4 @@
-package com.Pilotos.pilotosCompany;
+package com.Pilotos.pilotosCompany.Model;
 
 public class Empresa {
 

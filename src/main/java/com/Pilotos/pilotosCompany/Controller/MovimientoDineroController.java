@@ -9,7 +9,7 @@ public class MovimientoDineroController {
     private int monto_negativo;
     private String concepto;
     private String user_movimiento;
-      private String fecha_movimiento;
+    private date fecha_movimiento;
     private MovimientoDinero modelo;
     private MovimientoDineroView vista;
 
@@ -66,7 +66,7 @@ public class MovimientoDineroController {
         this.user_movimiento = user_movimiento;
     }
     
-      public String getFecha_movimiento() {
+      public date getFecha_movimiento() {
         return fecha_movimiento;
     }
 

@@ -2,12 +2,21 @@
 package com.Pilotos.pilotosCompany.Model;
 
 public class MovimientoDinero {
+     private int id;
     private int monto;
     private int monto_positivo;
     private int monto_negativo;
     private String concepto;
     private String user_movimiento;
+    private String fecha_movimiento;
+ 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getMonto() {
         return monto;
     }
@@ -46,5 +55,12 @@ public class MovimientoDinero {
 
     public void setUser_movimiento(String user_movimiento) {
         this.user_movimiento = user_movimiento;
+    }
+      public String getFecha_movimiento() {
+        return fecha_movimiento;
+    }
+
+    public void setFecha_movimiento(String fecha_movimiento) {
+        this.fecha_movimiento = fecha_movimiento;
     }
 }

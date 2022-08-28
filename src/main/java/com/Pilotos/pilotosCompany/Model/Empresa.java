@@ -3,7 +3,6 @@ package com.Pilotos.pilotosCompany.Model;
 import javax.persistance.Entity;
 import javax.persistance.Id;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.*;
 
 
@@ -16,10 +15,13 @@ public class Empresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEmpresa;
-    @Column(name="nombre",)
+    @Column(name="nombre", nullable = false)
     private String nombre;
+    @Column(name="direccion", nullable = false)
     private String direccion;
+    @Column(name="telefono", nullable = false)
     private int telefono;
+    @Column(name="NIT", nullable = false)
     private String NIT;
 
     public Empresa (String nombre, String direccion, int idEmpresa, int telefono, String NIT) {

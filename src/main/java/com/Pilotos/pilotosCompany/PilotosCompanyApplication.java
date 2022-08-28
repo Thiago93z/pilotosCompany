@@ -16,5 +16,23 @@ public class PilotosCompanyApplication {
 		pilotos.setDireccion("Av bolivar 15-58");
 		System.out.println(pilotos.getDireccion());
 	}
+System.out.println("Proyecto MVC Monto");
+        MovimientoDinero modelo;
+        modelo = llenarDatosMovimiento();
+        MovimientoDineroView vista = new MovimientoDineroView();
+        MovimientoDineroController controlador = new MovimientoDineroController(modelo, vista);
+        controlador.actualizarVista();
+	}
 
+    }
+    //retornar datos del monto'metodo
+    private static MovimientoDinero llenarDatosMovimiento(){
+        MovimientoDinero movimiento = new MovimientoDinero();
+        llenarDatosMovimiento().setMonto(12);
+        llenarDatosMovimiento().setMonto_positivo(8);
+        llenarDatosMovimiento().setMonto_negativo(3);
+        llenarDatosMovimiento().setConcepto("cambio de montos");
+        llenarDatosMovimiento().setUser_movimiento("admin1");
+        return movimiento;
+    }
 }

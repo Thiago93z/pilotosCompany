@@ -1,15 +1,31 @@
 package com.Pilotos.pilotosCompany.Model;
 
-public class Empresa {
+import javax.persistance.Entity;
+import javax.persistance.Id;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.*;
 
+
+@Entity
+@Table(name="Empresa")
+
+
+
+public class Empresa {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmpresa;
+    @Column(name="nombre",)
     private String nombre;
     private String direccion;
     private int telefono;
     private String NIT;
 
-    public Empresa (String nombre, String direccion, int telefono, String NIT) {
+    public Empresa (String nombre, String direccion, int idEmpresa, int telefono, String NIT) {
         this.nombre = nombre;
         this.direccion = direccion;
+        this.idEmpresa = idEmpresa;
         this.telefono = telefono;
         this.NIT = NIT;
     }

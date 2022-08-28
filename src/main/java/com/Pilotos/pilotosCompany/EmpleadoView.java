@@ -1,5 +1,5 @@
 package com.Pilotos.pilotosCompany.Controller;
-package view;
+
 
 public class Vista {
     public void modificarEmpleado(String empleado, String id,String empresa,  String rol, String mail){

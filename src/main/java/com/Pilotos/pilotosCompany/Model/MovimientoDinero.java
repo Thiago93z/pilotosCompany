@@ -28,9 +28,19 @@ public class MovimientoDinero {
 
     @column(name="fecha_movimiento")
     private String fecha_movimiento;
-public MovimientoDinero(){
+    
+    @ManyToOne
+    @JoinTable(name="empresa",
+            joinColumns = @JoinColumn(name="id")    )
+    private Empresa empresa;
 
-}
+    @ManyToOne
+    @JoinTable(name="empleados",
+            joinColumns = @JoinColumn(name="id")    )
+    private Empleado empleado;
+
+    public MovimientoDinero(){
+    }
 
     public MovimientoDinero(Integer id, Integer monto, Integer monto_positivo, Integer monto_negativo, String concepto, String user_movimiento, String fecha_movimiento) {
         this.id = id;

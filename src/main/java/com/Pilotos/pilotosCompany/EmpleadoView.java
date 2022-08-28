@@ -1,4 +1,4 @@
-package com.Pilotos.pilotosCompany.Controller;
+package com.Pilotos.pilotosCompany.Vista;
 
 
 public class Vista {

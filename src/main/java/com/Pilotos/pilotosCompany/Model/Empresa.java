@@ -1,7 +1,5 @@
 package com.Pilotos.pilotosCompany.Model;
 
-import javax.persistance.Entity;
-import javax.persistance.Id;
 import javax.persistence.Entity;
 import javax.persistence.*;
 

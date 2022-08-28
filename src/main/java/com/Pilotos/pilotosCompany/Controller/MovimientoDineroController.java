@@ -3,11 +3,13 @@ import com.ciclo3.pilotos.Modelo.MovimientoDinero;
 import com.ciclo3.pilotos.Vista.MovimientoDineroView;
 
 public class MovimientoDineroController {
+     private int id;
     private int monto;
     private int monto_positivo;
     private int monto_negativo;
     private String concepto;
     private String user_movimiento;
+      private String fecha_movimiento;
     private MovimientoDinero modelo;
     private MovimientoDineroView vista;
 
@@ -17,6 +19,13 @@ public class MovimientoDineroController {
         this.vista = vista;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public int getMonto() {
         return monto;
     }
@@ -56,6 +65,14 @@ public class MovimientoDineroController {
     public void setUser_movimiento(String user_movimiento) {
         this.user_movimiento = user_movimiento;
     }
+    
+      public String getFecha_movimiento() {
+        return fecha_movimiento;
+    }
+
+    public void setFecha_movimiento(String fecha_movimiento) {
+        this.fecha_movimiento = fecha_movimiento;
+    }
 
     public MovimientoDinero getModelo() {
         return modelo;
@@ -74,6 +91,6 @@ public class MovimientoDineroController {
     }
 //metodo
     public void actualizarVista(){
-        vista.imprimirDatosMovimiento(modelo.getMonto(),modelo.getMonto_positivo(),modelo.getMonto_negativo(),modelo.getConcepto(),modelo.getUser_movimiento());
+        vista.imprimirDatosMovimiento(modelo.getId(),modelo.getMonto(),modelo.getMonto_positivo(),modelo.getMonto_negativo(),modelo.getConcepto(),modelo.getUser_movimiento(),modelo.getFecha_movimiento());
     }
 }

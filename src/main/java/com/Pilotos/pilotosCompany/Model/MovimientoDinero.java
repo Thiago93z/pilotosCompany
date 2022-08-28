@@ -8,7 +8,7 @@ public class MovimientoDinero {
     private int monto_negativo;
     private String concepto;
     private String user_movimiento;
-    private String fecha_movimiento;
+    private  date  fecha_movimiento;
  
     public int getId() {
         return id;
@@ -56,7 +56,7 @@ public class MovimientoDinero {
     public void setUser_movimiento(String user_movimiento) {
         this.user_movimiento = user_movimiento;
     }
-      public String getFecha_movimiento() {
+      public  date getFecha_movimiento() {
         return fecha_movimiento;
     }
 

@@ -13,10 +13,7 @@ public class Empleado {
     private int idEmpleado;
     @Column(name="empleado",nullable = false)
     String empleado;
-    @Column(name = "id",nullable = false)
-
-    String id;
-    @Column(name="empresa",nullable = false)
+     @Column(name="empresa",nullable = false)
     String empresa;
     @Column(name="rol",nullable = false)
     String rol;

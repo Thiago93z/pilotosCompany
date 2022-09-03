@@ -20,6 +20,7 @@ public class Empleado {
     @Column(name="mail",nullable = false)
     private String mail;
     @ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empresa.class)
+     @JoinColumn(name= "idEmpresa")
     private Empresa Empresa;
 
     public Empleado() {

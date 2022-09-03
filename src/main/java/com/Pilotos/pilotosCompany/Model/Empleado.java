@@ -1,27 +1,32 @@
 package com.Pilotos.pilotosCompany.Model;
 
-import javax.persistence.Entity;
+import com.Pilotos.pilotosCompany.Controller.EmpleadoComtroller;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name="Empleado")
-
-
+@Table(name="Empleados")
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Column(name = "id")
+    private int id;
     @Column(name="empleado",nullable = false)
-    String empleado;
-     @Column(name="empresa",nullable = false)
-    String empresa;
+    private  String empleado;
+    @Column(name="empresa",nullable = false)
+    private String empresa;
     @Column(name="rol",nullable = false)
-    String rol;
+    private String rol;
     @Column(name="mail",nullable = false)
-    String mail;
-    public Empleado(String empleado, String id, String empresa, String rol, String mail) {
+    private String mail;
+    @ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empresa.class)
+    private Empresa Empresa;
+
+    public Empleado() {
+    }
+
+    public Empleado(String empleado, String empresa, String rol, String mail) {
         this.empleado = empleado;
-        this.id = id;
         this.empresa = empresa;
         this.rol = rol;
         this.mail = mail;
@@ -33,14 +38,6 @@ public class Empleado {
 
     public void setEmpleado(String empleado) {
         this.empleado = empleado;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getEmpresa() {

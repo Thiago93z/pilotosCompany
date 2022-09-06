@@ -27,7 +27,7 @@ public class EntityEmpleado {
     @Column (name = "rol")
     @Enumerated (EnumType.STRING)
     private EnumRol rol;
-    @JoinColumn (name = "id_empresa", referencedColumnName = "id_empresa")
+    @JoinColumn (name = "idEmpresa", referencedColumnName = "id_empresa")
     @ManyToOne (optional = false)
     private EntityEmpresa idEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpleado")

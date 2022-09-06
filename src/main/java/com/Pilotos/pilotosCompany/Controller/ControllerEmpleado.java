@@ -1,6 +1,6 @@
 package com.Pilotos.pilotosCompany.Controller;
 
-import com.Pilotos.pilotosCompany.Entity.Empleado;
+import com.Pilotos.pilotosCompany.Model.Empleado;
 import com.Pilotos.pilotosCompany.repository.EntityEmpleado;
 import com.Pilotos.pilotosCompany.services.ServiceEmpleado;
 import io.swagger.annotations.Api;
@@ -42,15 +42,15 @@ public class ControllerEmpleado {
 
 
     @GetMapping (path = "/api/listaEmpleados", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<EntityEmpleado> listaEmpleados (){
+    public ArrayList<Empleado> listaEmpleados (){
         return serviceEmpleado.listar();
    }
 
     @GetMapping (path = "/api/buscarEmpleado/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityEmpleado> buscarEmpleado (@PathVariable Long id){
-        EntityEmpleado p = serviceEmpleado.buscarEmpleado(id);
-        if ( p != null){
-            return new ResponseEntity<EntityEmpleado>(p, HttpStatus.OK);
+    public ResponseEntity<Empleado> buscarEmpleado (@PathVariable Long id){
+        Empleado currentEmploy = serviceEmpleado.buscarEmpleado(id);
+        if ( currentEmploy != null){
+            return new ResponseEntity<Empleado>(currentEmploy, HttpStatus.OK);
         }else{
             return new ResponseEntity("Error de Ejecución ", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -58,14 +58,14 @@ public class ControllerEmpleado {
 
 
     @PostMapping (path = "/api/crearEmpleado", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public  ResponseEntity <EntityEmpleado> crearEmpleado (@RequestBody EntityEmpleado empleado){
+    public  ResponseEntity <Empleado> crearEmpleado (@RequestBody Empleado empleado){
 
        boolean salida = serviceEmpleado.addEmpleado(empleado);
 
 
        if(salida == true){
 
-           return new ResponseEntity<EntityEmpleado>(empleado, HttpStatus.OK);
+           return new ResponseEntity<Empleado>(empleado, HttpStatus.OK);
 
        }else {
 
@@ -78,13 +78,13 @@ public class ControllerEmpleado {
 
 
     @PutMapping ( path = "/api/actualizarEmpleado", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity <EntityEmpleado> actualizarEmpleado(@RequestParam Long id, @RequestParam String nombreModificado){
+    public ResponseEntity <Empleado> actualizarEmpleado(@RequestParam Long id, @RequestParam String nombreModificado){
 
-        EntityEmpleado p = serviceEmpleado.buscarEmpleado(id);
-        p.setNombre(nombreModificado);
+        Empleado currentEmploy = serviceEmpleado.buscarEmpleado(id);
+        currentEmploy.setNombre(nombreModificado);
         System.out.println("Method PUT");
 
-       return new ResponseEntity<EntityEmpleado>(p, HttpStatus.OK);
+       return new ResponseEntity<Empleado>(currentEmploy, HttpStatus.OK);
 
     }
 
@@ -99,7 +99,7 @@ public class ControllerEmpleado {
     @DeleteMapping (path = "/api/borrarEmpleado/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity <Boolean> borrarPersona (@PathVariable Long id){
 
-        EntityEmpleado p = serviceEmpleado.buscarEmpleado(id);
+        Empleado p = serviceEmpleado.buscarEmpleado(id);
 
         Boolean salida = serviceEmpleado.eliminarEmpleado(p);
 

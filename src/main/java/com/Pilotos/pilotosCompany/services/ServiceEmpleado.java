@@ -1,5 +1,6 @@
 package com.Pilotos.pilotosCompany.services;
 
+import com.Pilotos.pilotosCompany.Model.Empleado;
 import com.Pilotos.pilotosCompany.repository.EntityEmpleado;
 import com.Pilotos.pilotosCompany.repository.EntityPermisos;
 import com.Pilotos.pilotosCompany.repository.RepositoryEmpleado;
@@ -25,23 +26,23 @@ public class ServiceEmpleado {
 
     @Autowired
     RepositoryPermisos repositoryPermisos;
-    ArrayList <EntityEmpleado> listaEmpleados;
+    ArrayList <Empleado> listaEmpleados;
 
-    public ServiceEmpleado(ArrayList<EntityEmpleado> listaEmpleados) {
+    public ServiceEmpleado(ArrayList<Empleado> listaEmpleados) {
         this.listaEmpleados = listaEmpleados;
     }
 
 
-    public String inscribirEmpleado(EntityEmpleado empleadoNuevo){
+    public String inscribirEmpleado(Empleado empleadoNuevo){
 
         String inscripcion = "El alumno " + empleadoNuevo.getNombre() + " " + empleadoNuevo.getApellido() + " Con " + empleadoNuevo.getEdad() + "  años, Quedo inscrito al programa "  ;
 
         return inscripcion;
     }
 
-    public boolean addEmpleado(EntityEmpleado empleado){
+    public boolean addEmpleado(Empleado empleado){
 
-        EntityEmpleado empleado1 = new EntityEmpleado();
+        Empleado empleado1 = new Empleado();
         empleado1.setNombre(empleado.getNombre());
         empleado1.setApellido(empleado.getApellido());
         empleado1.setEdad(empleado.getEdad());
@@ -53,7 +54,7 @@ public class ServiceEmpleado {
 
     }
 
-    public ArrayList<EntityEmpleado> listar (){
+    public ArrayList<Empleado> listar (){
 
         System.out.println("Metodo listar del service");
 
@@ -61,11 +62,11 @@ public class ServiceEmpleado {
 
     }
 
-    public EntityEmpleado buscarEmpleado (Long id){
+    public Empleado buscarEmpleado (Long id){
 
-        EntityEmpleado empleado = null;
+        Empleado empleado = null;
 
-        for (EntityEmpleado p :listaEmpleados ) {
+        for (Empleado p :listaEmpleados ) {
             if (p.getId() == id){
                 return p;
             }
@@ -76,7 +77,7 @@ public class ServiceEmpleado {
 
 
 
-    public Boolean eliminarEmpleado (EntityEmpleado empleado){
+    public Boolean eliminarEmpleado (Empleado empleado){
 
         listaEmpleados.remove(empleado);
 

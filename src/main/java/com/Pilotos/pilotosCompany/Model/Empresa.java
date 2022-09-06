@@ -1,4 +1,4 @@
-package com.Pilotos.pilotosCompany.Entity;
+package com.Pilotos.pilotosCompany.Model;
 
 import lombok.Data;
 

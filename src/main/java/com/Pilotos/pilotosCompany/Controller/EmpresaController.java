@@ -23,24 +23,12 @@ public class EmpresaController {
         return empresaService.verEmpresa();
     }
 
+
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    private ResponseEntity<Empresa> verEmpresaById(@PathVariable(value = "id") Long id){
-
-        Empresa currentEmpresa = empresaService.verEmpresaById(id);
-        if(currentEmpresa!=null){
-            return new ResponseEntity<Empresa>(currentEmpresa, HttpStatus.OK);
-        }else {
-            return new ResponseEntity("Error en Controller", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping(path = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     private Optional<Empresa> verEmpresaPorId(@PathVariable(value = "id") Long id){
         Optional<Empresa> currentEmpresa = empresaService.verEmpresaPorId(id);
         return currentEmpresa;
     }
-
-
 
     @PostMapping("")
     private void crearEmpresa (@RequestBody Empresa empresa){

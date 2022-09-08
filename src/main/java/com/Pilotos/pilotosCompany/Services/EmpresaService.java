@@ -35,17 +35,6 @@ public class EmpresaService {
         return empresas;
     }
 
-    public Empresa verEmpresaById(Long id){
-        Empresa empresa = null;
-
-        for (Empresa currentEmpresa : empresas){
-            if(currentEmpresa.getId() == id){
-                return currentEmpresa;
-            }
-        }
-        return empresa;
-    }
-
     public Optional<Empresa> verEmpresaPorId(Long id){
 
         return empresaRepository.findById(id);

@@ -14,10 +14,17 @@ public class MovimientoDineroController {
     @Autowired
     MovimientoDineroService movimientoDineroService;
 
-    @GetMapping({"/MovimientoDinero","/verMovimientoDinero"})
+    @GetMapping({"/","/verMovimientoDinero"})
     public  String viewMovimientoDinero(Model model){
         List<MovimientoDinero> listaMovimientoDinero = movimientoDineroServ.getAllMovimientoDinero();
         model.addAttribute("movimientoDineroList", listaMovimientoDinero);
         return "verMovimientoDinero";
+    }
+    
+     @GetMapping({"/AgregarMovimientoDinero"})
+    public  String viewAddMovimientoDinero(Model model){
+        MovimientoDinero movDin = new MovimientoDinero();
+        model.addAttribute("movDin", movDin);
+        return "agregarMovimientoDinero"; 
     }
 }

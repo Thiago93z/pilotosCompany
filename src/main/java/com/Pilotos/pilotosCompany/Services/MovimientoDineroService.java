@@ -15,27 +15,27 @@ public class MovimientoDineroService {
 
    public List<MovimientoDinero> getAllMovimientoDinero(){
             List<MovimientoDinero> listaMovimientoDinero = new ArrayList<>();
-            movimientoDineroRepo.findAll().forEach(movimientoDinero -> listaMovimientoDinero.add(movimientoDinero));
+            movimientoDineroRepository.findAll().forEach(movimientoDinero -> listaMovimientoDinero.add(movimientoDinero));
             return listaMovimientoDinero;
         }
 
         //metodo para buscar por id
         public MovimientoDinero getMovimientoDinero(Integer id){
             //buscar con id
-            return movimientoDineroRepo.findById(id).get();
+            return movimientoDineroRepository.findById(id).get();
         }
 
         //guardar o actualizar sobreescribir el objeto
         public boolean actualizarMovimientoDinero(MovimientoDinero movimientoDinero){
-            MovimientoDinero emp = movimientoDineroRepo.save(movimientoDinero);
-            if (movimientoDineroRepo.findById(emp.getId())!= null){
+            MovimientoDinero emp = movimientoDineroRepository.save(movimientoDinero);
+            if (movimientoDineroRepository.findById(emp.getId())!= null){
                 return true;
             }
             return false;
         }
         //metodo para eliminar
         public boolean eliminarMovimientoDinero(Integer id){
-            movimientoDineroRepo.deleteById(id);
+            movimientoDineroRepository.deleteById(id);
             if (getMovimientoDinero(id)!= null){
                 return false;
             }

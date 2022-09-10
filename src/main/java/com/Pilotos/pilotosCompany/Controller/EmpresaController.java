@@ -1,15 +1,47 @@
 package com.Pilotos.pilotosCompany.Controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.Pilotos.pilotosCompany.Model.Empresa;
+import com.Pilotos.pilotosCompany.Services.EmpresaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping (value = "/empresa")
 public class EmpresaController {
+    @Autowired
+    EmpresaService empresaService;
 
-    @RequestMapping("/")
-    public String Empresa(){
-        return "Empresa works!";
+    @GetMapping("")
+    private List<Empresa> verEmpresa(){
+        return empresaService.verEmpresa();
     }
 
 
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    private Optional<Empresa> verEmpresaPorId(@PathVariable(value = "id") Long id){
+        Optional<Empresa> currentEmpresa = empresaService.verEmpresaPorId(id);
+        return currentEmpresa;
+    }
+
+    @PostMapping("")
+    private void crearEmpresa (@RequestBody Empresa empresa){
+        empresaService.crearEmpresa(empresa);
+    }
+
+    @DeleteMapping("/{id}")
+    private void eliminarEmpresa(@PathVariable("id") Long id){
+        empresaService.eliminarEmpresa(id);
+    }
+
+    @PutMapping("/editarempresa")
+    private void editarEmpresa(@RequestBody Empresa empresa){
+        empresaService.editarEmpresa(empresa);
+    }
 }

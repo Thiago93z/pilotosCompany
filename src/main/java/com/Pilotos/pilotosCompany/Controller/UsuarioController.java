@@ -1,0 +1,36 @@
+package com.Pilotos.pilotosCompany.Controller;
+
+import com.Pilotos.pilotosCompany.Model.Usuario;
+import com.Pilotos.pilotosCompany.Services.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class UsuarioController {
+    @Autowired
+    UsuarioService usuarioservice;
+    
+    @GetMapping("/usuario")
+    private List<Usuario> verUsuario() {
+        return usuarioService.verUsuario();
+    }
+
+    @GetMapping("/usuario/{id}")
+    private void verUsuarioPorId(@PathVariable("id") Long id){
+        return usuarioService.verUsuarioPorId(id);
+    }
+    @PostMapping("/usuario")
+    private void crearUsuario(@RequestBody Usuario usuario){
+        usuarioService.crearUsuario(usuario);
+    }
+    @PutMapping("/editarUsuario")
+    private void editarUsuario(@RequestBody Usuario usuario){
+        usuarioService.editarUsuario(usuario);
+    }
+    @DeleteMapping("/usuario/{id}")
+    private void eliminarUsuario(@PathVariable("id") Long id){
+        usuarioservice.eliminarUsuario(id);
+    }
+}

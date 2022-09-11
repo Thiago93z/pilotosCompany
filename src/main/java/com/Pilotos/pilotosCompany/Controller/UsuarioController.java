@@ -16,19 +16,17 @@ public class UsuarioController {
     private List<Usuario> verUsuario() {
         return usuarioService.verUsuario();
     }
-
-    @GetMapping("/usuario/{id}")
-    private void verUsuarioPorId(@PathVariable("id") Long id){
-        return usuarioService.verUsuarioPorId(id);
-    }
+    
     @PostMapping("/usuario")
     private void crearUsuario(@RequestBody Usuario usuario){
         usuarioService.crearUsuario(usuario);
     }
+    
     @PutMapping("/editarUsuario")
     private void editarUsuario(@RequestBody Usuario usuario){
         usuarioService.editarUsuario(usuario);
     }
+    
     @DeleteMapping("/usuario/{id}")
     private void eliminarUsuario(@PathVariable("id") Long id){
         usuarioservice.eliminarUsuario(id);

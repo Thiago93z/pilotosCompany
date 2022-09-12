@@ -21,8 +21,8 @@
             <p class="font-weight-bolder">Historico movimientos de dinero</p>
         </div>
         <div class="col-sm-3">
-            <button type="button" class="btn btn-primary"><a th:href="@{/crearEmpresa}">Nuevo</a></button>
-            <button type="button" class="btn btn-primary"><a th:href="@{/buscarEmpresa}">Buscar</a></button>
+            <button type="button" class="btn btn-primary"><a th:href="@{/AgregarEmpresa}">Nuevo</a></button>
+            <button type="button" class="btn btn-primary"><a th:href="@{/BuscarEmpresa}">Buscar</a></button>
         </div>
     </div>
     <br>
@@ -43,11 +43,36 @@
             <td th:text="${movimientoDinero.monto}"></td>
             <td th:text="${movimientoDinero.concepto}"></td>
             <td th:text="${movimientoDinero.usuario}"></td>
-            <td><button type="button" class="btn btn-info"><a th:href="@{/editarMovimientoDinero/{id}(id=${movimientoDinero.id})}">Editar</a></button></td>
-            <td><button type="button" class="btn btn-info"><a th:href="@{/eliminarMovimientoDinero/{id}(id=${movimientoDinero.id})}">Eliminar</a></button></td>
+            <td><button type="button" class="btn btn-info"><a th:href="@{/EditarMovimientoDinero/{id}(id=${movimientoDinero.id})}">Editar</a></button></td>
+            <td><button type="button" class="btn btn-info"><a th:href="@{/EliminarMovimientoDinero/{id}(id=${movimientoDinero.id})}">Eliminar</a></button></td>
         </tr>
         </tbody>
     </table>
 </div>
+    
+<script th:inline="javascript">
+    window.onload=function(){
+
+        var msg= [[${mensaje}]];
+        if (msg == "saveOK"){
+            Command : toastr["success"]("Empresa creada con éxito!")
+            }
+        else if (msg == "updateOK"){
+            Command : toastr["success"]("Empresa actualizada con éxito!")
+        }
+        else if (msg == "deleteOK"){
+            Command : toastr["error"]("Empresa eliminada con éxito!")
+        }
+        else if (msg == "deleteError"){
+            Command : toastr["error"]("Empresa no ha sido eliminada!")
+        }
+        toastr.options={
+            "positionClass": "toast-top-right",
+            "showDuration":"300",
+            "showMethod":"fadeIn",
+            "hideMethod":"fadeOut",
+        }
+    }
+</script>   
 </body>
 </html>

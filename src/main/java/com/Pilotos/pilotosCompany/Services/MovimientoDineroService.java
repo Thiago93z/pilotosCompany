@@ -18,14 +18,11 @@ public class MovimientoDineroService {
             movimientoDineroRepository.findAll().forEach(movimientoDinero -> listaMovimientoDinero.add(movimientoDinero));
             return listaMovimientoDinero;
         }
-
-        //metodo para buscar por id
+        
         public MovimientoDinero getMovimientoDinero(Integer id){
-            //buscar con id
-            return movimientoDineroRepository.findById(id).get();
+                 return movimientoDineroRepository.findById(id).get();
         }
 
-        //guardar o actualizar sobreescribir el objeto
         public boolean actualizarMovimientoDinero(MovimientoDinero movimientoDinero){
             MovimientoDinero emp = movimientoDineroRepository.save(movimientoDinero);
             if (movimientoDineroRepository.findById(emp.getId())!= null){
@@ -33,12 +30,33 @@ public class MovimientoDineroService {
             }
             return false;
         }
-        //metodo para eliminar
-        public boolean eliminarMovimientoDinero(Integer id){
+       
+            public boolean eliminarMovimientoDinero(Integer id){
             movimientoDineroRepository.deleteById(id);
             if (getMovimientoDinero(id)!= null){
                 return false;
             }
             return true;
         }
+     
+        public Long obtenerSumaMontos(){
+            return movimientoDineroRepo.SumarMonto();
+        }
+
+        public Long MontosPorEmpleado(Integer id){
+            return movimientoDineroRepo.MontosPorEmpleado(id);
+        }
+    
+        public Long MontosPorEmpresa(Integer id){
+            return movimientoDineroRepo.MontosPorEmpresa(id);
+        }
+    
+        public ArrayList<MovimientoDinero> obtenerPorEmpleado(Integer id) {
+            return movimientoDineroRepo.findByEmpleado(id);
+        }
+
+        public ArrayList<MovimientoDinero> obtenerPorEmpresa(Integer id) { 
+            return movimientoDineroRepo.findByEmpresa(id);
+        }
+
 }

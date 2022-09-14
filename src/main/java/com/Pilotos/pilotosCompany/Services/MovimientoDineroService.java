@@ -23,9 +23,9 @@ public class MovimientoDineroService {
                  return movimientoDineroRepository.findById(id).get();
         }
 
-        public boolean actualizarMovimientoDinero(MovimientoDinero movimientoDinero){
-            MovimientoDinero emp = movimientoDineroRepository.save(movimientoDinero);
-            if (movimientoDineroRepository.findById(emp.getId())!= null){
+        public boolean actualizarMovimientoDinero(MovimientoDinero movDinero){
+            MovimientoDinero movimientoDinero = movimientoDineroRepository.save(movDinero);
+            if (movimientoDineroRepository.findById(movimientoDinero.getId())!= null){
                 return true;
             }
             return false;
@@ -33,10 +33,10 @@ public class MovimientoDineroService {
        
             public boolean eliminarMovimientoDinero(Integer id){
             movimientoDineroRepository.deleteById(id);
-            if (getMovimientoDinero(id)!= null){
-                return false;
+             if (movimientoDineroRepo.findById(id)!= null){
+                return true;
             }
-            return true;
+            return false;
         }
      
         public Long obtenerSumaMontos(){

@@ -40,23 +40,23 @@ public class MovimientoDineroService {
         }
      
         public Long obtenerSumaMontos(){
-            return movimientoDineroRepo.SumarMonto();
+            return movimientoDineroRepository.SumarMonto();
         }
 
         public Long MontosPorEmpleado(Integer id){
-            return movimientoDineroRepo.MontosPorEmpleado(id);
+            return movimientoDineroRepository.MontosPorEmpleado(id);
         }
     
         public Long MontosPorEmpresa(Integer id){
-            return movimientoDineroRepo.MontosPorEmpresa(id);
+            return movimientoDineroRepository.MontosPorEmpresa(id);
         }
     
         public ArrayList<MovimientoDinero> obtenerPorEmpleado(Integer id) {
-            return movimientoDineroRepo.findByEmpleado(id);
+            return movimientoDineroRepository.findByEmpleado(id);
         }
 
         public ArrayList<MovimientoDinero> obtenerPorEmpresa(Integer id) { 
-            return movimientoDineroRepo.findByEmpresa(id);
+            return movimientoDineroRepository.findByEmpresa(id);
         }
 
 }

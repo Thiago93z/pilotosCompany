@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -16,19 +17,19 @@ public class MovimientoDineroController {
 
     @GetMapping({"/","/verMovimientoDinero"})
     public  String viewMovimientoDinero(Model model, @ModelAttribute("mensaje") String mensaje){
-        List<MovimientoDinero> listaMovimientoDinero = movimientoDineroServ.getAllMovimientoDinero();
+        List<MovimientoDinero> listaMovimientoDinero = movimientoDineroService.getAllMovimientoDinero();
         model.addAttribute("movimientoDineroList", listaMovimientoDinero);
         return "verMovimientoDinero";
     }
-    
-     @GetMapping({"/AgregarMovimientoDinero"})
+
+    @GetMapping({"/AgregarMovimientoDinero"})
     public  String AddMovimientoDinero(Model model){
         MovimientoDinero movDin = new MovimientoDinero();
         model.addAttribute("movDin", movDin);
-        return "agregarMovimientoDinero"; 
+        return "agregarMovimientoDinero";
     }
-    
-       @PostMapping({"/GuardarMovimientoDinero"})//servicio
+
+    @PostMapping({"/GuardarMovimientoDinero"})//servicio
     public  String SaveMovimientoDinero(MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes) {
         if(movimientoDineroService.actualizarMovimientoDinero(movimientoDinero)==true){
             redirectAttributes.addFlashAttribute("mensaje","saveOK");
@@ -38,7 +39,7 @@ public class MovimientoDineroController {
         redirectAttributes.addFlashAttribute("mensaje","saveError");
         return "redirect:/AgregarMovimientoDinero";
     }
-      @PostMapping("/ActualizarMovimientoDinero")
+    @PostMapping("/ActualizarMovimientoDinero")
     public String updateMovimientoDinero(@ModelAttribute("movimientoDinero") MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes){
         if(movimientoDineroService.actualizarMovimientoDinero(movimientoDinero)){
             redirectAttributes.addFlashAttribute("mensaje","updateOK");

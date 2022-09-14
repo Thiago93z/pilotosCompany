@@ -1,49 +1,32 @@
 package com.Pilotos.pilotosCompany.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Collection;
+
+@Entity
+@AllArgsConstructor
+@Data
+
 public class Empresa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
     private String nombre;
     private String direccion;
     private int telefono;
-    private String NIT;
+    private String nit;
 
-    public Empresa (String nombre, String direccion, int telefono, String NIT) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.NIT = NIT;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmpresa")
+    @JsonIgnore
+    private  Collection<Empleado> empleados;
 
-    public String getNombre() {
-        return nombre;
-    }
+    public Empresa(){
 
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getNIT() {
-        return NIT;
-    }
-
-    public void setNIT(String NIT) {
-        this.NIT = NIT;
     }
 }

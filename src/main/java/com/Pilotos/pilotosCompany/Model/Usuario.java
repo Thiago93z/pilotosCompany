@@ -13,25 +13,23 @@ public class Usuario {
     private long id;
     @Column(name="nombre", nullable = false)
     private String nombre;
-    @Column(name="direccion", nullable = false)
+    @Column(name="direccion")
     private String direccion;
     @Column(name="telefono", nullable = false)
     private String telefono;
     @Column(name="documento", nullable = false)
     private String documento;
   
-    @ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empresa.class)
-    @JoinColumn(name = "IdEmpresa")
+    @ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empleado.class)
+    @JoinColumn(name = "Id_Empleado")
     private Empresa Empresa;
 
-
-
-    public usuario(){
+    public Usuario(){
 
     }
 
 
-    public usuario(String nombre,String direccion, String telefono, String documento){
+    public Usuario(String nombre,String direccion, String telefono, String documento){
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;

@@ -1,7 +1,11 @@
 package com.Pilotos.pilotosCompany.Model;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MovimientoDinero")
@@ -13,6 +17,14 @@ public class MovimientoDinero {
     private int id;
     private long monto;
     private String concepto;
+
+    @CreationTimestamp
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
+
+    @UpdateTimestamp
+    @Column(name = "fecha_actualizacion")
+    private LocalDateTime fechaActualizacion;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

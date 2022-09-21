@@ -1,10 +1,14 @@
 package com.Pilotos.pilotosCompany.Model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name="Usuario")
+@Table(name="usuario")
 
 public class Usuario {
     @Id
@@ -19,11 +23,20 @@ public class Usuario {
     private String telefono;
     @Column(name="documento", nullable = false)
     private String documento;
-  
-    @ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empleado.class)
+
+    @CreationTimestamp
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion;
+
+    @UpdateTimestamp
+    @Column(name = "fecha_actualizacion")
+    private LocalDateTime fechaActualizacion;
+
+
+    /*@ManyToOne(fetch = FetchType.LAZY , targetEntity = com.Pilotos.pilotosCompany.Model.Empleado.class)
     @JoinColumn(name = "Id_Empleado")
     private Empresa Empresa;
-
+*/
     public Usuario(){
 
     }

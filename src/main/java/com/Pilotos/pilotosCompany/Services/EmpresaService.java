@@ -34,9 +34,9 @@ public class EmpresaService {
         return empresas;
     }
 
-    public Optional<Empresa> verEmpresaPorId(Long id){
+    public Empresa verEmpresaPorId(Long id){
 
-        return empresaRepository.findById(id);
+        return empresaRepository.findById(id).get();
 
     }
 

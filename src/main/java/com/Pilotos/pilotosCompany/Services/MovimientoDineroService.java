@@ -33,7 +33,7 @@ public class MovimientoDineroService {
        
             public boolean eliminarMovimientoDinero(Integer id){
             movimientoDineroRepository.deleteById(id);
-             if (movimientoDineroRepo.findById(id)!= null){
+             if (movimientoDineroRepository.findById(id)!= null){
                 return true;
             }
             return false;

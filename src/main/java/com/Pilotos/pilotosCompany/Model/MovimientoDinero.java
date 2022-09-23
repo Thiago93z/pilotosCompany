@@ -17,7 +17,14 @@ public class MovimientoDinero {
     private int id;
     private long monto;
     private String concepto;
+    @ManyToOne
+    @JoinColumn(name = "empleado_id")
+    private Empleado usuario;
+    
+     @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date fecha;
 
+    
     @CreationTimestamp
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
@@ -25,18 +32,15 @@ public class MovimientoDinero {
     @UpdateTimestamp
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Empleado usuario;
-
+    
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(long monto, String concepto, Empleado usuario) {
+    public MovimientoDinero(long monto, String concepto, Empleado usuario, Date fecha) {
         this.monto = monto;
         this.concepto = concepto;
         this.usuario = usuario;
+        this.fecha = fecha;
     }
 
     public int getId() {
@@ -69,5 +73,12 @@ public class MovimientoDinero {
 
     public void setUsuario(Empleado usuario) {
         this.usuario = usuario;
+    }
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

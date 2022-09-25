@@ -1,6 +1,7 @@
 package com.Pilotos.pilotosCompany.Services;
 
 import com.Pilotos.pilotosCompany.Model.Empleado;
+import com.Pilotos.pilotosCompany.Model.Empresa;
 import com.Pilotos.pilotosCompany.Repository.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class EmpleadoService {
         List<Empleado> empleados = new ArrayList<Empleado>();
         empleados.addAll(empleadoRepository.findAll());
         return empleados;
+    }
+    public Empleado verEmpleadoPorId(Long id){
+
+        return empleadoRepository.findById(id).get();
+
     }
 
     public void eliminarEmpleado(Long id){

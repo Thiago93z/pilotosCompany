@@ -14,9 +14,10 @@
 </style>
 </head>
 <body>
-
-<div class="container-fluid">
+<div class="container-fluid" align="center">
+    <div class="jumbotron text-center" style="margin-bottom:0">
   <h1>Agregar nuevos movimientos</h1><br>
+    </div>
   <form th:action="@{/GuardarMovimientoDinero}" th:object="${movDin}" method="post">
     <div class="row">
       <div class="form-group col-md-12">
@@ -25,8 +26,7 @@
           <input type="number" th:field="*{monto}" class="form-control" id="monto" required="required">
         </div>
 
-
-               <label class="col-sm-3" for="concepto"> Concepto del movimiento</label>
+      <label class="col-sm-3" for="concepto"> Concepto del movimiento</label>
         <div class="col-sm-6">
           <select th:field="*{concepto}" class="form-control" id="concepto"required="required">
         <option th:value=1>Abono</option>
@@ -46,22 +46,24 @@
                           </div>
 
 
-                  <label class="col-md-3" for="fecha">Fecha del movimiento:</label>
-                  <div class="col-md-4">
+                  <label class="col-sm-3" for="fecha">Fecha del movimiento:</label>
+                  <div class="col-sm-4">
                     <input type="date" th:field="*{fecha}" class="form-control" id="fecha" required="required" readonly>
                   </div>
-      </div>
-            </div>
-
-                  <div class="row">
-                <div class="col-sm-10">
-                  <button class="btn btn-success">Guardar</button>
-                </div>
-
               </div>
+            </div>
+<div class="row">
+                <div class="col-sm-12">
+                  <button class="btn btn-success">Guardar</button>
+
+          <a href="javascript: history.go(-1)" class="btn btn-dark" role="button">Cancelar</a></div>
+                </div>
+      <br><br>
+
           </form>
-          <br>
-          <a href="javascript: history.go(-1)" class="btn btn-dark" role="button">Atras</a>
         </div>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+       <div class="float-lg-right">creado por Sonia Reyes</div><br>
+</div>
         </body>
         </html>

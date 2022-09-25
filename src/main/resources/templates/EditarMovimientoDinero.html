@@ -13,11 +13,10 @@
     a:hover {color: black; text-decoration:none;}
 </style>
 </head>
-<body>
-<div class="container-fluid">
+<body><div class="container-fluid" align="center">
+  <div class="jumbotron text-center" style="margin-bottom:0">
   <h1>Editar los movimientos de dinero</h1><br>
-  <h3>Edite aqui los movimientos de dinero</h3><br>
-
+  </div>
   <form th:action="@{/ActualizarMovimientoDinero}" th:object="${mov}" method="post">
     <div class="row">
       <div class="form-group col-md-12">
@@ -43,8 +42,8 @@
     </div>
     <div class="row">
       <div class="form-group col-md-12">
-        <label class="col-sm-3" for="monto"> Monto</label>
-        <div class="col-sm-6">
+        <label class="col-md-3" for="monto"> Monto</label>
+        <div class="col-md-6">
           <input type="number" th:field="*{monto}" class="form-control" id="monto" required="required">
         </div>
       </div>
@@ -62,30 +61,29 @@
         </div>
       </div>
     </div>
-
-    <!--Campo para fecha-->
     <div class="row">
-      <div class="form-group col-md-12">
-        <label class="col-md-3" for="fecha">Fecha movimiento:</label>
-        <div class="col-md-6">
+      <div class="form-group col-sm-12">
+        <label class="col-sm-3" for="fecha">Fecha movimiento:</label>
+        <div class="col-sm-6">
           <input type="date" th:field="*{fecha}" class="form-control" id="fecha" required="required" readonly></div>
       </div>
     </div>
+    <br><br>
 
-
-
-    <!--Boton para enviartodo y ejecutar accion -->
     <div class="row">
-      <div class="col-md-2">
+      <div class="col-sm-12">
         <button class="btn btn-success">Actualizar</button>
+
+        <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Cancelar</a>
+
       </div>
     </div>
-
+    <br><br>
   </form>
-
-  <br>
-  <a href="javascript: history.go(-1)" class="btn btn-info" role="button">Atrás</a>
-
+</div>
+</div>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+  <div class="float-lg-right">creado por Sonia Reyes</div><br>
 </div>
 </body>
 </html>

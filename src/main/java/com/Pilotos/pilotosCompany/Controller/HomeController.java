@@ -6,11 +6,16 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 
-    @Controller
+import java.sql.SQLOutput;
+
+@Controller
     public class HomeController {
 
-        @GetMapping("/index")
+        @GetMapping("/")
         public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
+            if(principal!=null) {
+                System.out.println(principal.getClaims());
+            }
             return "index";
         }
 

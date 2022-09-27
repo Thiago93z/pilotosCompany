@@ -22,11 +22,11 @@ public class MovimientoDinero {
     @ManyToOne
     @JoinColumn(name = "empleado_id")
     private Empleado usuario;
-    
-     @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
 
-    
+
     @CreationTimestamp
     @Column(name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
@@ -34,7 +34,7 @@ public class MovimientoDinero {
     @UpdateTimestamp
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
-    
+
     public MovimientoDinero() {
     }
 
@@ -76,6 +76,7 @@ public class MovimientoDinero {
     public void setUsuario(Empleado usuario) {
         this.usuario = usuario;
     }
+
     public Date getFecha() {
         return fecha;
     }

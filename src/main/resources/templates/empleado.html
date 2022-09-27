@@ -28,15 +28,15 @@
                 <th>Empresa</th>
                 <th>Id</th>
                 <th>Rol</th>
-                <th>Ver perfil</th>
                 <th colspan="2">Actions</th>
             </tr>
             <tr  class="text-center" th:each="empleado : ${empleado}">
                 <td th:text="${empleado.nombre}"></td>
                 <td th:text="${empleado.mail}"></td>
                 <td th:text="${empleado.idEmpresa.nombre}"></td>
-                <td th:text="${empleado.rol}"></td>
                 <td th:text="${empleado.id}"></td>
+                <td th:text="${empleado.rol}"></td>
+
                 <td><a th:href="@{/empleado/editar/{id} (id = ${empleado.id})}"><i class="fa-solid fa-pen-to-square"></i></a></td>
                 <td><a th:href="@{/empleado/eliminar/{id} (id = ${empleado.id})}"><i class="fa-solid fa-trash"></i></a></td>
             </tr>

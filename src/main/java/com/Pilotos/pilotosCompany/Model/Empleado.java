@@ -22,13 +22,16 @@ public class Empleado {
     @Column(name = "id",nullable = false)
     private Long id;
 
-    @Column(name="mail",nullable = false)
+    @Column(name="mail",nullable = false, unique = true)
     private String mail;
     private String nombre;
     private int edad;
     @Enumerated(EnumType.STRING)
-    @Column(name = "rol")
+    @Column(name = "rol", columnDefinition = "USER")
     private Enum_Rol rol;
+
+    @Column(name = "auth0Id", unique = true)
+    private String auth0Id;
 
     @CreationTimestamp
     @Column(name = "fecha_creacion")

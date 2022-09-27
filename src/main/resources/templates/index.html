@@ -64,9 +64,14 @@
                                 <form>
                                     <main class="col-12 col-m-6 col-lg-10 d-flex justify-content-center align-content-center row" style="width: auto" >
 
-                                        <div class="col-md-6 d-flex justify-content-start m-5" style="width: 100%; position:fixed; top: 1.5em; left: 0.5em;">
-                                            <i class="fas fa-car fa-2x me-3" style="color: #ff6219;"></i>
-                                            <span class="h1 fw-bold mb-0">Pilotos</span>
+                                        <div class="col-md-6 d-flex justify-content-between m-5" style="width: 100%; position:fixed; top: 1.5em; left: 0.5em;">
+                                            <div>
+                                                <i class="fas fa-car fa-2x me-3" style="color: #ff6219;"></i>
+                                                <span class="h1 fw-bold mb-0">Pilotos</span>
+                                            </div>
+                                            <div sec:authorize="isAuthenticated()">
+                                                <a th:href="@{/logout}" class="btn btn-warning text-white" style="position: fixed; right: 5rem">Log Out</a>
+                                            </div>
                                         </div>
 
                                         <div>

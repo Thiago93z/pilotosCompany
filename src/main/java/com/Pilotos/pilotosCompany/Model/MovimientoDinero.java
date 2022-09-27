@@ -3,9 +3,11 @@ package com.Pilotos.pilotosCompany.Model;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "MovimientoDinero")
@@ -17,6 +19,13 @@ public class MovimientoDinero {
     private int id;
     private long monto;
     private String concepto;
+    @ManyToOne
+    @JoinColumn(name = "empleado_id")
+    private Empleado usuario;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fecha;
+
 
     @CreationTimestamp
     @Column(name = "fecha_creacion")
@@ -26,17 +35,14 @@ public class MovimientoDinero {
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Empleado usuario;
-
     public MovimientoDinero() {
     }
 
-    public MovimientoDinero(long monto, String concepto, Empleado usuario) {
+    public MovimientoDinero(long monto, String concepto, Empleado usuario, Date fecha) {
         this.monto = monto;
         this.concepto = concepto;
         this.usuario = usuario;
+        this.fecha = fecha;
     }
 
     public int getId() {
@@ -69,5 +75,13 @@ public class MovimientoDinero {
 
     public void setUsuario(Empleado usuario) {
         this.usuario = usuario;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 }

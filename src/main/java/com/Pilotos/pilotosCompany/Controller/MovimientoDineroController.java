@@ -1,69 +1,113 @@
 package com.Pilotos.pilotosCompany.Controller;
 
+import com.Pilotos.pilotosCompany.Model.Empleado;
 import com.Pilotos.pilotosCompany.Model.MovimientoDinero;
+import com.Pilotos.pilotosCompany.Repository.MovimientoDineroRepository;
+import com.Pilotos.pilotosCompany.Services.EmpleadoService;
 import com.Pilotos.pilotosCompany.Services.MovimientoDineroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class MovimientoDineroController {
     @Autowired
-    MovimientoDineroService movimientoDineroService;
+    EmpleadoService empleadoServ;
 
-    @GetMapping({"/","/verMovimientoDinero"})
-    public  String viewMovimientoDinero(Model model, @ModelAttribute("mensaje") String mensaje){
-        List<MovimientoDinero> listaMovimientoDinero = movimientoDineroService.getAllMovimientoDinero();
-        model.addAttribute("movimientoDineroList", listaMovimientoDinero);
+    @Autowired
+    MovimientoDineroService movDineroServ;
+
+    @Autowired
+    MovimientoDineroRepository movDineroRepo;
+
+
+    @RequestMapping("/VerMovimiento")// Controlador que nos lleva al template donde veremos todos los movimientos
+    public String viewMovimientoDinero(@RequestParam(value = "pagina", required = false, defaultValue = "1") int NumeroPagina,
+                                       @RequestParam(value = "medida", required = false, defaultValue = "5") int medida,
+                                       Model model, @ModelAttribute("mensaje") String mensaje) {
+        Page<MovimientoDinero> paginaMovimientos = movDineroRepo.findAll(PageRequest.of(NumeroPagina, medida));
+        model.addAttribute("movlist", paginaMovimientos.getContent());
+        model.addAttribute("paginas", new int[paginaMovimientos.getTotalPages()]);
+        model.addAttribute("paginaActual", NumeroPagina);
+        model.addAttribute("mensaje", mensaje);
+        Long sumaMonto = movDineroServ.obtenerSumaMontos();
+        model.addAttribute("SumaMontos", sumaMonto);
         return "verMovimientoDinero";
     }
 
-    @GetMapping({"/AgregarMovimientoDinero"})
-    public  String AddMovimientoDinero(Model model){
+    @GetMapping("/AgregarMovimientoDinero")
+    public String AddMovimientoDinero(Model model, @ModelAttribute("mensaje") String mensaje) {
         MovimientoDinero movDin = new MovimientoDinero();
         model.addAttribute("movDin", movDin);
+        model.addAttribute("mensaje", mensaje);
+        List<Empleado> listaEmpleado = empleadoServ.verEmpleado();
+        model.addAttribute("emplList", listaEmpleado);
         return "agregarMovimientoDinero";
     }
 
-    @PostMapping({"/GuardarMovimientoDinero"})//servicio
-    public  String SaveMovimientoDinero(MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes) {
-        if(movimientoDineroService.actualizarMovimientoDinero(movimientoDinero)==true){
-            redirectAttributes.addFlashAttribute("mensaje","saveOK");
-            return "redirect:/VerMovimientoDinero";
-            //redireccionamiento se hace a aservicios
+    @PostMapping("/GuardarMovimientoDinero")
+    public String SaveMovimientoDinero(MovimientoDinero mov, RedirectAttributes redirectAttributes) {
+        if (movDineroServ.actualizarMovimientoDinero(mov)) {
+            redirectAttributes.addFlashAttribute("mensaje", "saveOK");
+            return "redirect:/VerMovimiento";
         }
-        redirectAttributes.addFlashAttribute("mensaje","saveError");
+        redirectAttributes.addFlashAttribute("mensaje", "saveError");
         return "redirect:/AgregarMovimientoDinero";
     }
-    @PostMapping("/ActualizarMovimientoDinero")
-    public String updateMovimientoDinero(@ModelAttribute("movimientoDinero") MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes){
-        if(movimientoDineroService.actualizarMovimientoDinero(movimientoDinero)){
-            redirectAttributes.addFlashAttribute("mensaje","updateOK");
-            return "redirect:/VerMovimientoDinero";
-        }
-        redirectAttributes.addFlashAttribute("mensaje","updateError");
-        return "redirect:/EditarMovimientoDinero/"+ movimientoDinero.getId();
 
-    }
     @GetMapping("/EditarMovimientoDinero/{id}")
-    public String editarMovimientoDinero(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje){
-        MovimientoDinero movimientoDinero = movimientoDineroService.getMovimientoDinero(id);
-        model.addAttribute("MovimientoDinero", movimientoDinero);
+    public String editarMovimentoDinero(Model model, @PathVariable Integer id, @ModelAttribute("mensaje") String mensaje) {
+        MovimientoDinero mov = movDineroServ.getMovimientoDinero(id);
+        model.addAttribute("mov", mov);
         model.addAttribute("mensaje", mensaje);
-        return "editarEmpresa";
+        List<Empleado> listaEmpleados = empleadoServ.verEmpleado();
+        model.addAttribute("emplelist", listaEmpleados);
+        return "editarMovimientoDinero";
+    }
+
+    @PostMapping("/ActualizarMovimientoDinero")
+    public String updateMovimientoDinero(@ModelAttribute("movimientoDinero") MovimientoDinero movimientoDinero, RedirectAttributes redirectAttributes) {
+        if (movDineroServ.actualizarMovimientoDinero(movimientoDinero)) {
+            redirectAttributes.addFlashAttribute("mensaje", "updateOK");
+            return "redirect:/VerMovimiento";
+        }
+        redirectAttributes.addFlashAttribute("mensaje", "updateError");
+        return "redirect:/EditarMovimientoDinero/" + movimientoDinero.getId();
+
     }
 
     @GetMapping("/EliminarMovimientoDinero/{id}")
-    public String eliminarMovimientoDinero(@PathVariable Integer id, RedirectAttributes redirectAttributes){
-        if (movimientoDineroService.eliminarMovimientoDinero(id)==true){
-            redirectAttributes.addFlashAttribute("mensaje","deleteOK");
-            return "redirect:/VerMovimientoDinero";
+    public String eliminarMovimientoDinero(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
+        if (movDineroServ.eliminarMovimientoDinero(id)) {
+            redirectAttributes.addFlashAttribute("mensaje", "deleteOK");
+            return "redirect:/VerMovimiento";
         }
         redirectAttributes.addFlashAttribute("mensaje", "deleteError");
-        return "redirect:/VerMovimientoDinero";
+        return "redirect:/VerMovimiento";
+    }
+
+    //controlador para el boton Ver empleados y  ver montos
+    @GetMapping("/Empleado/{id}/MovimientoDinero")
+    public String movimientosPorEmpleado(@PathVariable("id") Integer id, Model model) {
+        List<MovimientoDinero> movlist = movDineroServ.obtenerPorEmpleado(id);
+        model.addAttribute("movlist", movlist);
+        Long sumaMonto = movDineroServ.MontosPorEmpleado(id);
+        model.addAttribute("SumaMontos", sumaMonto);
+        return "verMovimientoDinero";
+    }
+
+    @GetMapping("/Empresa/{id}/MovimientoDinero")
+    public String verMovimientosPorEmpresa(@PathVariable("id") Integer id, Model model) {
+        List<MovimientoDinero> listaMovimientos = movDineroServ.obtenerPorEmpresa(id);
+        model.addAttribute("movlist", listaMovimientos);
+        Long sumaMonto = movDineroServ.MontosPorEmpresa(id);
+        model.addAttribute("SumaMontos", sumaMonto);
+        return "verMovimientoDinero";
     }
 }

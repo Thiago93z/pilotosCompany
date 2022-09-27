@@ -33,7 +33,7 @@ public class EmpresaController {
     }
 
     @PostMapping("/empresa")
-    private String crearPokemon(Empresa empresa){
+    private String crear(Empresa empresa){
         empresaService.crearEmpresa(empresa);
         return "redirect:/empresa";
     }

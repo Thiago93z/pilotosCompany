@@ -54,6 +54,6 @@ public class EmpleadoController {
     @PostMapping("/empleado/actualizar/{id}")
     private String editarEmpleado(@PathVariable("id") Long id, Empleado empleado){
         empleadoService.editarEmpleado(empleado);
-        return "redirect:/empresa";
+        return "redirect:/empleado";
     }
 }

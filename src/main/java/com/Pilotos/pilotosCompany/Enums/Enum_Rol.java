@@ -7,6 +7,6 @@ public enum Enum_Rol {
 
     ADMIN,
     CLIENT,
-    USER
+    VISITANTE
 
 }

@@ -6,9 +6,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements SecurityConfigWeb {
 
     private final LogoutHandler logoutHandler;
 
@@ -26,5 +27,12 @@ public class SecurityConfig {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(logoutHandler)
                 .and().build();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry){
+        if(!registry.hasMappingForPattern("/static/**")){
+            registry.addResourceHandler("static/**");
+        }
     }
 }

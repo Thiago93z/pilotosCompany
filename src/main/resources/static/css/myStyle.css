@@ -1,3 +1,10 @@
-body{
-    background-color: royalblue;
+h1{
+    color: royalblue;
+}
+
+table th{
+    color: red;
+}
+*{
+    color:red !important;
 }

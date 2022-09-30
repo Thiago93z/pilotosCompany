@@ -27,17 +27,18 @@ public class MovimientoDineroController {
     MovimientoDineroRepository movDineroRepo;
 
 
-    @RequestMapping("/VerMovimiento")// Controlador que nos lleva al template donde veremos todos los movimientos
-    public String viewMovimientoDinero(@RequestParam(value = "pagina", required = false, defaultValue = "1") int NumeroPagina,
-                                       @RequestParam(value = "medida", required = false, defaultValue = "5") int medida,
-                                       Model model, @ModelAttribute("mensaje") String mensaje) {
-        Page<MovimientoDinero> paginaMovimientos = movDineroRepo.findAll(PageRequest.of(NumeroPagina, medida));
-        model.addAttribute("movlist", paginaMovimientos.getContent());
-        model.addAttribute("paginas", new int[paginaMovimientos.getTotalPages()]);
+    @RequestMapping ("/VerMovimiento")
+    public String viewMovimientoDinero(@RequestParam(value = "pagina", required=false, defaultValue = "1") int NumeroPagina,
+                                       @RequestParam(value = "medida", required=false, defaultValue = "5") int medida,
+                                       Model model, @ModelAttribute("mensaje") String mensaje        ){
+
+        Page<MovimientoDinero> paginaMovimientos = movDineroRepo.findAll(PageRequest.of(NumeroPagina,medida));
+        model.addAttribute("movlist",paginaMovimientos.getContent());
+        model.addAttribute("paginas",new int[paginaMovimientos.getTotalPages()]);
         model.addAttribute("paginaActual", NumeroPagina);
-        model.addAttribute("mensaje", mensaje);
+        model.addAttribute("mensaje",mensaje);
         Long sumaMonto = movDineroServ.obtenerSumaMontos();
-        model.addAttribute("SumaMontos", sumaMonto);
+        model.addAttribute("SumaMontos",sumaMonto);
         return "verMovimientoDinero";
     }
 
@@ -111,3 +112,4 @@ public class MovimientoDineroController {
         return "verMovimientoDinero";
     }
 }
+

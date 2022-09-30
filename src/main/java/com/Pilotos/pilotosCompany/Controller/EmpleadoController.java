@@ -1,8 +1,10 @@
 package com.Pilotos.pilotosCompany.Controller;
 
 import com.Pilotos.pilotosCompany.Enums.Enum_Rol;
+import com.Pilotos.pilotosCompany.Model.Empleado;
 import com.Pilotos.pilotosCompany.Model.Empresa;
 import com.Pilotos.pilotosCompany.Model.UserClient;
+import com.Pilotos.pilotosCompany.Services.EmpleadoService;
 import com.Pilotos.pilotosCompany.Services.EmpresaService;
 import com.Pilotos.pilotosCompany.Services.UserClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,70 +14,68 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.List;
 @Controller
-public class EmpresaController {
+public class EmpleadoController {
     @Autowired
-    EmpresaService empresaService;
+    EmpleadoService empleadoService;
 
     @Autowired
     UserClientService userClientService;
-
 //    @GetMapping("verempresa")
 //    private List<Empresa> verEmpresa(){
 //        return empresaService.verEmpresa();
 //    }
 
-    @GetMapping("/empresa")
-    private String verEmpresa(Model model) {
-        model.addAttribute("empresas", empresaService.verEmpresa());
-        return "empresa";
+    @GetMapping("/empleado")
+    private String verEmpleado(Model model){
+        model.addAttribute("empleado", empleadoService.verEmpleado());
+        return "empleado";
     }
 
-    @GetMapping("/crear-empresa")
-    private String crearEmpresa(Empresa empresa,@AuthenticationPrincipal OidcUser principal) {
+    @GetMapping("/crear-empleado")
+    private String crearEmpleado(Empleado empleado,@AuthenticationPrincipal OidcUser principal){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()!= Enum_Rol.valueOf("VISITANTE")) {
-            return "crear-empresa";
+            return "crear-empleado";
         }
-        return "redirect:empresa";
+
+        return "redirect:/empleado";
     }
 
-    @PostMapping("/empresa")
-    private String crear(Empresa empresa,@AuthenticationPrincipal OidcUser principal) {
+    @PostMapping("/empleado")
+    private String crear(Empleado empleado,@AuthenticationPrincipal OidcUser principal){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()!= Enum_Rol.valueOf("VISITANTE"))
-        empresaService.crearEmpresa(empresa);
-        return "redirect:/empresa";
+        empleadoService.crearEmpleado(empleado);
+        return "redirect:/empleado";
     }
 
-    @GetMapping("empresa/eliminar/{id}")
-    private String eliminarEmpresa(@PathVariable("id") Long id,@AuthenticationPrincipal OidcUser principal) {
+    @GetMapping("empleado/eliminar/{id}")
+    private String eliminarEmpleado(@PathVariable("id") Long id,@AuthenticationPrincipal OidcUser principal){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()== Enum_Rol.valueOf("ADMIN"))
-                empresaService.eliminarEmpresa(id);
-                return "redirect:/empresa";
-
+        empleadoService.eliminarEmpleado(id);
+        return "redirect:/empleado";
     }
 
 
-    @GetMapping("/empresa/editar/{id}")
-    private String verEmpresaPorId(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal OidcUser principal) {
+    @GetMapping("/empleado/editar/{id}")
+    private String verEmpleadoPorId(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal OidcUser principal){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()== Enum_Rol.valueOf("ADMIN")) {
-            Empresa empresa = empresaService.verEmpresaPorId(id);
-            model.addAttribute("empresa", empresa);
-            return "actualizar-empresa";
+            Empleado empleado = empleadoService.verEmpleadoPorId(id);
+            model.addAttribute("empleado", empleado);
+            return "actualizar-empleado";
         }
-        return "redirect:/empresa";
+        return "redirect:/empleado";
     }
 
-    @PostMapping("/empresa/actualizar/{id}")
-    private String editarEmpresa(@PathVariable("id") Long id, Empresa empresa, @AuthenticationPrincipal OidcUser principal) {
+    @PostMapping("/empleado/actualizar/{id}")
+    private String editarEmpleado(@PathVariable("id") Long id, Empleado empleado, @AuthenticationPrincipal OidcUser principal){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()== Enum_Rol.valueOf("ADMIN"))
-        empresaService.editarEmpresa(empresa);
-        return "redirect:/empresa";
+        empleadoService.editarEmpleado(empleado);
+        return "redirect:/empleado";
     }
 }
-

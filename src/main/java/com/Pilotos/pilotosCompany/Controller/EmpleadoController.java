@@ -21,6 +21,8 @@ public class EmpleadoController {
     EmpleadoService empleadoService;
 
     @Autowired
+    EmpresaService empresaService;
+    @Autowired
     UserClientService userClientService;
 //    @GetMapping("verempresa")
 //    private List<Empresa> verEmpresa(){
@@ -34,9 +36,11 @@ public class EmpleadoController {
     }
 
     @GetMapping("/crear-empleado")
-    private String crearEmpleado(Empleado empleado,@AuthenticationPrincipal OidcUser principal){
+    private String crearEmpleado(Empleado empleado,@AuthenticationPrincipal OidcUser principal, Model model){
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
         if(userClient.getRol()!= Enum_Rol.valueOf("VISITANTE")) {
+            List<Empresa> listaEmpresa = empresaService.verEmpresa();
+            model.addAttribute("empresaList", listaEmpresa);
             return "crear-empleado";
         }
 

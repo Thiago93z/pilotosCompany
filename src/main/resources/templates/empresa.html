@@ -6,38 +6,39 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/styles.css">
-    <link rel="stylesheet" href="" th:href="@{../static/css/myStyle.css}"/>
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/static/css/myStyle.css}"/>
+    <link rel="icon" type="image/x-icon" class="text-danger" href="https://static.thenounproject.com/png/1281-200.png">
+    <title>Empresa</title>
 </head>
 <body>
-<h1>Interfaz de Empresa</h1>
+<h1 class="text-white">Interfaz de Empresa</h1>
+<video autoplay muted loop style="position: fixed; z-index: -1; right: 0; bottom: 0; top: 0; left: 0; min-width: 100%; min-height: 100%;" ><source src="https://player.vimeo.com/external/455723916.hd.mp4?s=f5269a7bddfbbcd7f7596bd5496dd3b2096ca4ef&profile_id=175&oauth2_token_id=57447761" type="video/mp4"></video>
 <nav class="d-flex justify-content-end">
     <ul class="d-flex list-unstyled">
-        <li><a class="text-decoration-none mx-2" href="/">Inicio</a></li>
-        <li><a class="text-decoration-none mx-2" href="/empresa">Empresa</a></li>
-        <li><a class="text-decoration-none mx-2" href="/empleado">Empleado</a></li>
+        <li><a class="text-decoration-none text-white font-weight-bold" href="/">Inicio</a></li>
+        <li><a class="text-decoration-none text-white font-weight-bold mx-2" href="/empresa">Empresa</a></li>
+        <li><a class="text-decoration-none mx-2 text-white font-weight-bold" href="/empleado">Empleado</a></li>
     </ul>
 </nav>
 <main>
     <div class="m-3">
         <table class="table table-striped">
-            <tr class="text-center">
-                <th>Nombre</th>
-                <th>ID</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-                <th>NIT</th>
-                <th colspan="2">Actions</th>
+            <tr class="text-center text-white">
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">ID</th>
+                <th class="text-warning">Direccion</th>
+                <th class="text-warning">Telefono</th>
+                <th class="text-warning">NIT</th>
+                <th class="text-warning" colspan="2">Actions</th>
             </tr>
             <tr  class="text-center" th:each="empresa : ${empresas}">
-                <td th:text="${empresa.nombre}"></td>
-                <td th:text="${empresa.id}"></td>
-                <td th:text="${empresa.direccion}"></td>
-                <td th:text="${empresa.telefono}"></td>
-                <td th:text="${empresa.nit}"></td>
+                <td class="text-white font-italic" th:text="${empresa.nombre}"></td>
+                <td class="text-white" th:text="${empresa.id}"></td>
+                <td class="text-white" th:text="${empresa.direccion}"></td>
+                <td class="text-white" th:text="${empresa.telefono}"></td>
+                <td class="text-white" th:text="${empresa.nit}"></td>
                 <td><a th:href="@{/empresa/editar/{id} (id = ${empresa.id})}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                <td><a th:href="@{/empresa/eliminar/{id} (id = ${empresa.id})}"><i class="fa-solid fa-trash"></i></a></td>
+                <td><a th:href="@{/empresa/eliminar/{id} (id = ${empresa.id})}"><i class="fa-solid fa-trash text-danger"></i></a></td>
             </tr>
         </table>
     </div>
@@ -48,9 +49,9 @@
 
 </main>
 <footer class="blockquote-footer">
-    <p>Creado por @PilotosCompany</p>
-    <p>Equipo Pilotos</p>
-    <p>Proyecto MisionTIC 2022</p>
+    <p class="text-white">Creado por @PilotosCompany</p>
+    <p class="text-white">Equipo Pilotos</p>
+    <p class="text-white">Proyecto MisionTIC 2022</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/2a04d2021f.js" crossorigin="anonymous"></script>

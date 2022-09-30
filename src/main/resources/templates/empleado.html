@@ -6,10 +6,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" class="text-danger" href="https://static.thenounproject.com/png/1281-200.png">
+    <title>Empleado</title>
 </head>
+
 <body>
+<video autoplay muted loop style="position: fixed; z-index: -1; right: 0; top: 0; bottom: 0; left: 0; min-width: 100%; min-height: 100%;" ><source src="https://player.vimeo.com/external/496512191.sd.mp4?s=06b57cc8544362a78aa95bf57fd0a69b00e7aa16&profile_id=165&oauth2_token_id=57447761" type="video/mp4"></video>
 <h1>Interfaz de Empleado</h1>
 <nav class="d-flex justify-content-end">
     <ul class="d-flex list-unstyled">
@@ -22,22 +24,22 @@
     <div class="m-3">
         <table class="table table-striped">
             <tr class="text-center">
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Empresa</th>
-                <th>Rol</th>
-                <th>Id</th>
-                <th>Ver perfil</th>
-                <th colspan="2">Actions</th>
+                <th class="text-warning">Nombre</th>
+                <th class="text-warning">Email</th>
+                <th class="text-warning">Empresa</th>
+                <th class="text-warning">Rol</th>
+                <th class="text-warning">Id</th>
+                <th class="text-warning">Ver perfil</th>
+                <th class="text-warning" colspan="2">Actions</th>
             </tr>
             <tr  class="text-center" th:each="empleado : ${empleado}">
-                <td th:text="${empleado.nombre}"></td>
-                <td th:text="${empleado.mail}"></td>
-                <td th:text="${empleado.idEmpresa.nombre}"></td>
-                <td th:text="${empleado.rol}"></td>
-                <td th:text="${empleado.id}"></td>
+                <td class="text-white" th:text="${empleado.nombre}"></td>
+                <td class="text-white" th:text="${empleado.mail}"></td>
+                <td class="text-white" th:text="${empleado.idEmpresa.nombre}"></td>
+                <td class="text-white" th:text="${empleado.rol}"></td>
+                <td class="text-white" th:text="${empleado.id}"></td>
                 <td><a th:href="@{/empleado/editar/{id} (id = ${empleado.id})}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                <td><a th:href="@{/empleado/eliminar/{id} (id = ${empleado.id})}"><i class="fa-solid fa-trash"></i></a></td>
+                <td><a th:href="@{/empleado/eliminar/{id} (id = ${empleado.id})}"><i class="fa-solid fa-trash text-danger"></i></a></td>
             </tr>
         </table>
     </div>
@@ -48,9 +50,9 @@
 
 </main>
 <footer class="blockquote-footer">
-    <p>Creado por @PilotosCompany</p>
-    <p>Equipo Pilotos</p>
-    <p>Proyecto MisionTIC 2022</p>
+    <p class="text-white">Creado por @PilotosCompany</p>
+    <p class="text-white">Equipo Pilotos</p>
+    <p class="text-white">Proyecto MisionTIC 2022</p>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/2a04d2021f.js" crossorigin="anonymous"></script>

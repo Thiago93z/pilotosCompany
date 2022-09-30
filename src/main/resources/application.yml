@@ -4,16 +4,17 @@
 #spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 #spring.jpa.hibernate.ddl-auto=update
 
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/Pilotos
-    username: postgres
-    password: DUpar$3156
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/Pilotos
+#    username: postgres
+#    password: DUpar$3156
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    hibernate:
+#      ddl-auto: update
 
+spring:
   security:
     oauth2:
       client:

@@ -18,7 +18,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .oauth2Login()
+                .authorizeRequests()
+                .mvcMatchers("/").permitAll()
+                .anyRequest().authenticated()
+                .and().oauth2Login()
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(logoutHandler)

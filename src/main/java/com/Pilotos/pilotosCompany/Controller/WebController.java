@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
         @GetMapping("/")
-        public String index(Model model, @AuthenticationPrincipal OidcUser principal){
+        public String index(Model model, @AuthenticationPrincipal OidcUser principal, Model newModel){
+
             if(principal!=null) {
+                newModel.addAttribute("profile", principal.getClaims());
                 UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
                 model.addAttribute("userClient", userClient);
+                System.out.println(userClient.getRol());
                 System.out.println(principal.getClaims());
             }
             return "index";

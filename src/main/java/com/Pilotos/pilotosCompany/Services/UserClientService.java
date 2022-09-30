@@ -1,7 +1,10 @@
 package com.Pilotos.pilotosCompany.Services;
 
+import com.Pilotos.pilotosCompany.Enums.Enum_Rol;
 import com.Pilotos.pilotosCompany.Model.UserClient;
 import com.Pilotos.pilotosCompany.Repository.UserClientRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -14,6 +17,9 @@ public class UserClientService {
     }
 
     public UserClient createUserClient (UserClient newUserClient){
+        if(newUserClient.getRol()==null){
+            newUserClient.setRol(Enum_Rol.valueOf("VISITANTE"));
+        }
         return this.repository.save(newUserClient);
     }
 
@@ -28,8 +34,9 @@ public class UserClientService {
                 String name = (String) userData.get("nickname");
                 String image = (String) userData.get("picture");
                 String auth0Id = (String) userData.get("sub");
+                Enum_Rol rol = (Enum_Rol) userData.get("rol");
 
-                UserClient newUserClient = new UserClient(email = email, image = image, auth0Id = auth0Id);
+                UserClient newUserClient = new UserClient(email = email, image = image, auth0Id = auth0Id, rol=rol);
 
                 return createUserClient(newUserClient);
             }

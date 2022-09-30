@@ -30,15 +30,15 @@ public class EmpleadoController {
 //    }
 
     @GetMapping("/empleado")
-    private String verEmpleado(Model model){
+    private String verEmpleado(Model model) {
         model.addAttribute("empleado", empleadoService.verEmpleado());
         return "empleado";
     }
 
     @GetMapping("/crear-empleado")
-    private String crearEmpleado(Empleado empleado,@AuthenticationPrincipal OidcUser principal, Model model){
+    private String crearEmpleado(Empleado empleado, @AuthenticationPrincipal OidcUser principal, Model model) {
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
-        if(userClient.getRol()!= Enum_Rol.valueOf("VISITANTE")) {
+        if (userClient.getRol() != Enum_Rol.valueOf("VISITANTE")) {
             List<Empresa> listaEmpresa = empresaService.verEmpresa();
             model.addAttribute("empresaList", listaEmpresa);
             return "crear-empleado";
@@ -48,26 +48,28 @@ public class EmpleadoController {
     }
 
     @PostMapping("/empleado")
-    private String crear(Empleado empleado,@AuthenticationPrincipal OidcUser principal){
+    private String crear(Empleado empleado, @AuthenticationPrincipal OidcUser principal) {
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
-        if(userClient.getRol()!= Enum_Rol.valueOf("VISITANTE"))
-        empleadoService.crearEmpleado(empleado);
+        if (userClient.getRol() != Enum_Rol.valueOf("VISITANTE"))
+            empleadoService.crearEmpleado(empleado);
         return "redirect:/empleado";
     }
 
     @GetMapping("empleado/eliminar/{id}")
-    private String eliminarEmpleado(@PathVariable("id") Long id,@AuthenticationPrincipal OidcUser principal){
+    private String eliminarEmpleado(@PathVariable("id") Long id, @AuthenticationPrincipal OidcUser principal) {
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
-        if(userClient.getRol()== Enum_Rol.valueOf("ADMIN"))
-        empleadoService.eliminarEmpleado(id);
+        if (userClient.getRol() == Enum_Rol.valueOf("ADMIN"))
+            empleadoService.eliminarEmpleado(id);
         return "redirect:/empleado";
     }
 
 
     @GetMapping("/empleado/editar/{id}")
-    private String verEmpleadoPorId(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal OidcUser principal){
+    private String verEmpleadoPorId(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal OidcUser principal) {
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
-        if(userClient.getRol()== Enum_Rol.valueOf("ADMIN")) {
+        if (userClient.getRol() == Enum_Rol.valueOf("ADMIN")) {
+            List<Empresa> listaEmpresa = empresaService.verEmpresa();
+            model.addAttribute("empresaList", listaEmpresa);
             Empleado empleado = empleadoService.verEmpleadoPorId(id);
             model.addAttribute("empleado", empleado);
             return "actualizar-empleado";
@@ -76,10 +78,15 @@ public class EmpleadoController {
     }
 
     @PostMapping("/empleado/actualizar/{id}")
-    private String editarEmpleado(@PathVariable("id") Long id, Empleado empleado, @AuthenticationPrincipal OidcUser principal){
+    private String editarEmpleado(@PathVariable("id") Long id, Empleado empleado, @AuthenticationPrincipal OidcUser principal, Model model) {
         UserClient userClient = this.userClientService.getOrCreateUser(principal.getClaims());
-        if(userClient.getRol()== Enum_Rol.valueOf("ADMIN"))
-        empleadoService.editarEmpleado(empleado);
+        if (userClient.getRol() == Enum_Rol.valueOf("ADMIN")) {
+            List<Empresa> listaEmpresa = empresaService.verEmpresa();
+            model.addAttribute("empresaList", listaEmpresa);
+            empleadoService.editarEmpleado(empleado);
+            return "redirect:/empleado";
+        }
         return "redirect:/empleado";
     }
+
 }

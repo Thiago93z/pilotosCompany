@@ -17,7 +17,7 @@
 
 <div class="m-5 container-fluid">
     <div class="row">
-        <div class="col-12 col-m-6 col-lg-10 d-flex justify-content-center">
+        <div class="col-12 col-m-6 col-lg-10 gap-3 d-flex justify-content-center">
             <form th:action="@{/empleado/actualizar/{id} (id = ${empleado.id})}" method="post">
 
 
@@ -27,10 +27,15 @@
                 <label class="form-label" for="mail">mail</label>
                 <input class="form-control" type="text" id="mail" th:field="${empleado.mail}">
 
-                <label class="form-label" for="idEmpresa">Empresa</label>
-                <input class="form-control" type="text" id="idEmpresa" th:field="${empleado.idEmpresa.id}">
+<!--                <label class="form-label" for="idEmpresa">Empresa</label>-->
+<!--                <input class="form-control" type="text" id="idEmpresa" th:field="${empleado.idEmpresa.id}">-->
 
-
+                <label for="idEmpresa"> Empresa a la que pertenece</label>
+                <select class="form-control" id="idEmpresa" required="required" readonly name="idEmpresa">
+                    <option th:each="empresa : ${empresaList}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
+                    <!--        <option th:text="${#httpServletRequest.remoteUser}" th:value="${idEmpleado}"></option>
+                        -->
+                </select>
 
 
                 <label for="rol">rol</label>

@@ -17,32 +17,34 @@
 
 <div class="m-5 container-fluid">
     <div class="row">
-        <div class="col-12 col-m-6 col-lg-10 d-flex justify-content-center">
+        <div class="col-12 col-m-6 col-lg-10 gap-3 d-flex justify-content-center">
             <form th:action="@{/empleado}" method="post">
 
 
                 <label class="form-label" for="nombre">Nombre</label>
-                <input class="form-control" type="text" id="nombre" th:field="${empleado.nombre}">
+                <input class="form-control" type="text" id="nombre" th:field="${empleado.nombre}" required>
 
                 <label class="form-label" for="mail">mail</label>
-                <input class="form-control" type="text" id="mail" th:field="${empleado.mail}">
+                <input class="form-control" type="text" id="mail" th:field="${empleado.mail}" required>
 
-                <label class="form-label" for="idEmpresa">Empresa</label>
-                <input class="form-control" type="text" id="idEmpresa" th:field="${empleado.idEmpresa.id}">
+<!--                <label class="form-label" for="idEmpresa">Empresa</label>-->
+<!--                <input class="form-control" type="text" id="idEmpresa" th:field="${empleado.idEmpresa.id}" required>-->
 
-
-
-
-                <label for="rol">rol</label>
-                <select name="rol" id="rol">
-                    <option value="ADMIN">VISITANTE</option>
-                    <option value="USER">ADMIN</option>
-                    <option value="CLIENT">CLIENT</option>
-
-
+                <label for="idEmpresa"> Empresa a la que pertenece</label>
+                <select class="form-control" id="idEmpresa" required="required" readonly name="idEmpresa" >
+                    <option th:each="empresa : ${empresaList}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
+                    <!--        <option th:text="${#httpServletRequest.remoteUser}" th:value="${idEmpleado}"></option>
+                        -->
                 </select>
 
-
+                <div class="m-2">
+                    <label for="rol">rol</label>
+                    <select name="rol" id="rol" required>
+                        <option value="VISITANTE">VISITANTE</option>
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="CLIENT">CLIENT</option>
+                    </select>
+                </div>
 
                 <div class="m-5 d-flex justify-content-center">
                     <input class="btn btn-success" type="submit" value="Agregar Empleado">

@@ -24,6 +24,7 @@
         <table class="table table-striped">
             <tr class="text-center">
                 <th>Nombre</th>
+                <th>ID</th>
                 <th>Direccion</th>
                 <th>Telefono</th>
                 <th>NIT</th>
@@ -31,6 +32,7 @@
             </tr>
             <tr  class="text-center" th:each="empresa : ${empresas}">
                 <td th:text="${empresa.nombre}"></td>
+                <td th:text="${empresa.id}"></td>
                 <td th:text="${empresa.direccion}"></td>
                 <td th:text="${empresa.telefono}"></td>
                 <td th:text="${empresa.nit}"></td>
